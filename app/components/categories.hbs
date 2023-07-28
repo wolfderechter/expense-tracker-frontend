@@ -1,0 +1,21 @@
+<ul class="list-none p-0 w-[66%] md:w-[33%]">
+  {{#each @categories as |category|}}
+  <li class="relative flex flex-col bg-white rounded-lg shadow-md mb-4 p-4 w-full">
+    <div>
+      <h1 class="text-gray-800 text-lg font-bold mb-2">{{category.title}}
+      </h1>
+      <p class="text-gray-600 mb-2">
+        {{category.expenses.length}}
+        {{#if (gt category.expenses.length 1)}}
+        <span>expenses</span>
+        {{else}}
+        <span>expense</span>
+        {{/if}}
+      </p>
+    </div>
+    <button class="absolute top-0 right-0 mt-2 mr-2" type="button" {{on "click" (fn this.removeCategory category)}}>
+      x
+    </button>
+  </li>
+  {{/each}}
+</ul>

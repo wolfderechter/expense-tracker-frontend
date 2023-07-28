@@ -1,0 +1,23 @@
+<ul class="list-none p-0 w-[66%] md:w-[33%]">
+  {{#each this.sorted as |expense|}}
+  <li class="relative flex flex-col bg-white rounded-lg shadow-md mb-4 p-4 w-full">
+    <div>
+      <LinkTo @route="expense" @model={{expense}} class="text-gray-800 text-lg font-bold mb-2">{{expense.title}}
+      </LinkTo>
+      <p class="text-gray-600 mb-2">{{get expense.category 'title'}}</p>
+    </div>
+    <div class="flex-grow"></div>
+    <div class="text-gray-600 flex justify-between items-center">
+      <span>
+        {{expense.date}}
+      </span>
+      <span class="text-xl">
+        ${{expense.value}}
+      </span>
+    </div>
+    <button class="absolute top-0 right-0 mt-2 mr-2" type="button" {{on "click" (fn this.removeExpense expense)}}>
+      x
+    </button>
+  </li>
+  {{/each}}
+</ul>
