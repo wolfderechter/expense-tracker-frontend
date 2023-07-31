@@ -37,7 +37,7 @@ export default class NewController extends Controller {
   async selectCategory(event) {
     // Get the selected category ID from the event
     const selectedCategoryID = event.target.value;
-    this.existingCategory = await this.store.findRecord('category', selectedCategoryID);
+    this.existingCategory = await this.store.peekRecord('category', selectedCategoryID);
   }
 
   @action

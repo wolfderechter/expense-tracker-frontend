@@ -6,7 +6,7 @@ export default class ExpenseRoute extends Route {
 
   // Find expense object by expense_id
   async model(params) {
-    const expense = await this.store.findRecord('expense', params.expense_id);
+    const expense = await this.store.peekRecord('expense', params.expense_id);
     return expense;
   }
 }

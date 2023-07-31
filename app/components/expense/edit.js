@@ -31,7 +31,7 @@ export default class ExpensesComponent extends Component {
   async selectCategory(event) {
     // Get the selected category ID from the event
     const selectedCategoryID = event.target.value;
-    this.selectedCategory = await this.store.findRecord('category', selectedCategoryID);
+    this.selectedCategory = await this.store.peekRecord('category', selectedCategoryID);
   }
 
   @action
