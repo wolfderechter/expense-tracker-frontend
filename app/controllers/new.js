@@ -13,7 +13,6 @@ export default class NewController extends Controller {
   @tracked categories;
   @tracked newCategory;
 
-
   constructor() {
     super(...arguments);
   }
@@ -37,7 +36,10 @@ export default class NewController extends Controller {
   async selectCategory(event) {
     // Get the selected category ID from the event
     const selectedCategoryID = event.target.value;
-    this.existingCategory = await this.store.peekRecord('category', selectedCategoryID);
+    this.existingCategory = await this.store.peekRecord(
+      'category',
+      selectedCategoryID
+    );
   }
 
   @action
@@ -70,10 +72,9 @@ export default class NewController extends Controller {
 
     if (this.newCategory === '') return;
 
-
     // check if exists or create category
     let categoryExists = false;
-    this.categories.forEach(cat => {
+    this.categories.forEach((cat) => {
       if (cat.title === this.newCategory) {
         categoryExists = true;
       }
@@ -92,7 +93,5 @@ export default class NewController extends Controller {
     } catch (error) {
       console.error('Error creating category:', error);
     }
-
-
   }
 }

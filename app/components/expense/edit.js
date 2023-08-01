@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
-
 export default class ExpensesComponent extends Component {
   @service store;
   @tracked existingCategoryID;
@@ -26,12 +25,14 @@ export default class ExpensesComponent extends Component {
     }
   }
 
-
   @action
   async selectCategory(event) {
     // Get the selected category ID from the event
     const selectedCategoryID = event.target.value;
-    this.selectedCategory = await this.store.peekRecord('category', selectedCategoryID);
+    this.selectedCategory = await this.store.peekRecord(
+      'category',
+      selectedCategoryID
+    );
   }
 
   @action
@@ -52,10 +53,9 @@ export default class ExpensesComponent extends Component {
 
     if (this.newCategory === '') return;
 
-
     // check if exists or create category
     let categoryExists = false;
-    this.categories.forEach(cat => {
+    this.categories.forEach((cat) => {
       if (cat.title === this.newCategory) {
         categoryExists = true;
       }
@@ -74,7 +74,5 @@ export default class ExpensesComponent extends Component {
     } catch (error) {
       console.error('Error creating category:', error);
     }
-
-
   }
 }
