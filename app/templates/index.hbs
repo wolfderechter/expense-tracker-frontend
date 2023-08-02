@@ -1,12 +1,69 @@
 {{page-title "Expenses"}}
 
-<h1 class="text-3xl mb-3">All expenses</h1>
-<LinkTo @route='new' class="bg-blue-500 hover:bg-blue-700 text-white font-bold mt-2 py-2 px-4 rounded">New Expense
-</LinkTo>
-<Expenses @expenses={{@model.expenses}} />
 
 
+<h1 class="text-4xl mb-3 text-center">🧾</h1>
+<h1 class="text-4xl mb-6 text-center">Expense Tracker</h1>
 
-<h1 class="text-3xl mb-3">All categories</h1>
-<Categories @categories={{@model.categories}} />
+
+<label for="month">Expenses of</label>
+<div>
+  <button class='bg-gray-300 hover:bg-gray-600 text-white font-bold px-3 rounded' {{on "click"
+    this.prevMonth}}>&#60;</button>
+
+  <select class='w-[125px] text-center mb-1' id="month" value={{this.month}} {{on "change" this.changeMonth }}>
+    <option value="-1" selected>Everything</option>
+    <option value="0">January</option>
+    <option value="1">February</option>
+    <option value="2">March</option>
+    <option value="3">April</option>
+    <option value="4">May</option>
+    <option value="5">June</option>
+    <option value="6">July</option>
+    <option value="7">August</option>
+    <option value="8">September</option>
+    <option value="9">October</option>
+    <option value="10">November</option>
+    <option value="11">December</option>
+  </select>
+
+  <button class='bg-gray-300 hover:bg-gray-600 text-white font-bold px-3 rounded' {{on "click"
+    this.nextMonth}}>&#62;</button>
+
+</div>
+
+<!-- Hide the year when the everything option is selected -->
+{{#if (not-eq this.month -1)}}
+<div>
+  <input value={{this.year}} class="w-[125px] text-center bg-gray-100 mb-1" type="number" id="year" min="1900"
+    max="2100" step="1" {{on "change" this.changeYear }}>
+</div>
+{{/if}}
+
+<div>
+  <button class='bg-gray-300 hover:bg-gray-200 text-gray-800 font-bold px-3 rounded mb-1' {{on "click"
+    this.setCurrentMonth}}>Current Month</button>
+</div>
+
+<div class="grid md:grid-cols-2 grid-cols-1 gap-16 mt-6">
+  <div class='w-[250px]'>
+    <h1 class="text-2xl mb-3 text-center">All expenses</h1>
+    <div class="flex justify-center mb-4">
+      <LinkTo @route='new' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded">New Expense
+      </LinkTo>
+    </div>
+    <Expenses @expenses={{this.filteredExpenses}} />
+  </div>
+
+  <div class='w-[250px]'>
+    <h1 class="text-2xl mb-3 text-center">All categories</h1>
+    <div class="flex justify-center mb-4">
+      <LinkTo @route='new' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded">New
+        Category
+      </LinkTo>
+    </div>
+    <Categories @categories={{@model.categories}} @filter={{true}} @year={{this.year}} @month={{this.month}} />
+  </div>
+</div>
+
 {{outlet}}
