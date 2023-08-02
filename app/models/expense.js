@@ -4,5 +4,5 @@ export default class ExpenseModel extends Model {
   @attr title;
   @attr value;
   @attr date;
-  @belongsTo('category', { async: true, inverse: null }) category;
+  @belongsTo('category', { async: true, inverse: 'expenses' }) category;
 }
