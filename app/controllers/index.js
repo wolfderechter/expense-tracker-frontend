@@ -49,19 +49,14 @@ export default class IndexController extends Controller {
 
   @action
   async changeYear(event) {
-    console.log(event.target.value);
-    console.log(this.year);
     this.year = Number(event.target.value);
-    console.log(this.year);
     this.filter();
   }
 
   @action
   async filter() {
-    console.log("filtering")
     if (this.month === -1) {
-      // show all models and expenses
-      console.log("aaaa", this.model.expenses.length);
+      // show all expenses
       this.filteredExpenses = [...this.model.expenses];
       return;
     }
