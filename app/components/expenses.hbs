@@ -1,5 +1,5 @@
 <ul class="list-none p-0">
-  {{#each this.sorted as |expense|}}
+  {{#each @expenses as |expense|}}
   <li class="relative flex flex-col bg-white rounded-lg shadow-md mb-4 p-4 w-full">
     <div>
       <LinkTo @route="expense" @model={{expense}} class="text-gray-800 text-lg font-bold mb-2">{{expense.title}}

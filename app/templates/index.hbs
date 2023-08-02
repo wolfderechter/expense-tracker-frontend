@@ -52,7 +52,7 @@
       <LinkTo @route='new' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded">New Expense
       </LinkTo>
     </div>
-    <Expenses @expenses={{this.filteredExpenses}} />
+    <Expenses @expenses={{this.filteredExpenses}} @onRemoveExpense={{this.filter}} />
   </div>
 
   <div class='w-[250px]'>

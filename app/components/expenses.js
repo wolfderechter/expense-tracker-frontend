@@ -5,17 +5,11 @@ import { inject as service } from '@ember/service';
 export default class ExpensesComponent extends Component {
   @service store;
 
-  get sorted() {
-    let { expenses } = this.args;
-
-    let sortedExpenses = [...expenses];
-    sortedExpenses.sort((a, b) => new Date(a.date) - new Date(b.date));
-    return sortedExpenses;
-  }
-
   @action
-  removeExpense(expense, event) {
+  async removeExpense(expense, event) {
     event.preventDefault();
-    expense.destroyRecord();
+    await expense.destroyRecord();
+    // Tell parent component to refresh data
+    this.args.onRemoveExpense();
   }
 }
