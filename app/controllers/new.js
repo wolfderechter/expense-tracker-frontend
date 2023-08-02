@@ -61,8 +61,6 @@ export default class NewController extends Controller {
 
     // clear input fields
     this.newTitle = '';
-    this.existingCategory = '';
-    this.newDate = '';
     this.newValue = '';
   }
 
