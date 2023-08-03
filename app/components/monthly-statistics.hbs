@@ -3,6 +3,7 @@
   <p>{{this.totalExpenses}} total expenses</p>
   <p>Averaging ${{this.averageValue}}</p>
   <!-- Add more statistics as needed -->
+  {{ember-chart type='pie' data=this.categoriesByValueData width=200 height=200}}
 </div>
 
 {{yield}}

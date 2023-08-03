@@ -5,7 +5,7 @@
 <h1 class="text-4xl mb-3 text-center">🧾</h1>
 <h1 class="text-4xl mb-6 text-center">Expense Tracker</h1>
 
-<div class="grid md:grid-cols-2 grid-cols-1 gap-16 mt-6">
+<div class="grid md:grid-cols-2 grid-cols-1 gap-8 mt-6">
   <div class='w-[250px] text-center'>
     <label for="month">Expenses period</label>
     <div>
@@ -47,7 +47,8 @@
     </div>
 
   </div>
-  <MonthlyStatistics class="w-[250px] text-center" @filteredExpenses={{this.filteredExpenses}} @month={{this.month}} />
+  <MonthlyStatistics class="w-[250px] text-center" @filteredExpenses={{this.filteredExpenses}} @month={{this.month}}
+    @year={{this.year}} />
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6 items-start">
