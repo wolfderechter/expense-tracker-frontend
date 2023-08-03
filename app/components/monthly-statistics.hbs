@@ -1,0 +1,8 @@
+<div class="text-center">
+  <h1 class="text-2xl mb-3 text-center">{{if (eq @month -1) 'All' 'Monthly'}} Statistics</h1>
+  <p>{{this.totalExpenses}} total expenses</p>
+  <p>Averaging ${{this.averageValue}}</p>
+  <!-- Add more statistics as needed -->
+</div>
+
+{{yield}}

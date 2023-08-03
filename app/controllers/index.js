@@ -38,7 +38,7 @@ export default class IndexController extends Controller {
   async changeMonth(event) {
     this.month = Number(event.target.value);
 
-    // reset the year to the current year after selecting 'everything'
+    // reset the year to the current year after selecting 'all time'
     if (event.target.value === '-1') {
       this.year = new Date().getFullYear();
     }
