@@ -5,10 +5,10 @@ import { tracked } from '@glimmer/tracking';
 
 export default class ExpensesComponent extends Component {
   @service store;
-  @tracked existingCategoryID;
   @tracked newCategory;
   @tracked selectedCategory = null;
   @tracked categories;
+  @service toast;
 
   constructor() {
     super(...arguments);
@@ -19,7 +19,6 @@ export default class ExpensesComponent extends Component {
   async initialize() {
     try {
       this.categories = await this.store.findAll('category');
-      this.existingCategoryID = this.args.expense.category.id;
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
@@ -29,7 +28,11 @@ export default class ExpensesComponent extends Component {
   async selectCategory(event) {
     // Get the selected category ID from the event
     const selectedCategoryID = event.target.value;
-    this.selectedCategory = await this.store.peekRecord(
+
+    // exit if 'select a category' is selected
+    if (selectedCategoryID === '') return;
+
+    this.selectedCategory = await this.store.findRecord(
       'category',
       selectedCategoryID
     );
@@ -39,6 +42,7 @@ export default class ExpensesComponent extends Component {
   editExpense(expense, event) {
     event.preventDefault();
     expense.save();
+    this.toast.success('Expense sucesfully edited!', 'Success!');
 
     // Only update the category when one is selected
     if (this.selectedCategory !== null) {
@@ -56,12 +60,18 @@ export default class ExpensesComponent extends Component {
     // check if exists or create category
     let categoryExists = false;
     this.categories.forEach((cat) => {
-      if (cat.title === this.newCategory) {
+      if (cat.title.toLowerCase() === this.newCategory.toLowerCase()) {
         categoryExists = true;
       }
     });
 
-    if (categoryExists) return;
+    if (categoryExists) {
+      this.toast.warning(
+        `Category ${this.newCategory} already exists!`,
+        'Warning!'
+      );
+      return;
+    };
 
     let category = null;
     category = this.store.createRecord('category', {
@@ -70,6 +80,10 @@ export default class ExpensesComponent extends Component {
 
     try {
       await category.save();
+      this.toast.success(
+        `Category ${this.newCategory} sucesfully created!`,
+        'Success!'
+      );
       this.newCategory = '';
     } catch (error) {
       console.error('Error creating category:', error);

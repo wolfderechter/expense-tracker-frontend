@@ -6,6 +6,7 @@ export default class ExpenseRoute extends Route {
 
   // Find expense object by expense_id
   async model(params) {
+    await this.store.findAll('expense'); // need to fetch all expenses so when we do a refresh on the expense page all the expenses are still fetched and there when we go to the index page
     const expense = await this.store.peekRecord('expense', params.expense_id);
     return expense;
   }

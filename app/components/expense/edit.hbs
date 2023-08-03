@@ -19,11 +19,11 @@
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         id="category" {{on "change" this.selectCategory}}>
         <!-- shows a default select option when no category is present -->
-        {{#if (eq this.existingCategoryID null)}}
+        {{#if (eq @expense.category.id null)}}
         <option value="">Select a category</option>
         {{/if}}
         {{#each this.categories as |category|}}
-        <option value={{category.id}} selected="{{if (eq category.id this.existingCategoryID) true}}">
+        <option value={{category.id}} selected="{{if (eq category.id @expense.category.id) true}}">
           {{category.title}}
         </option>
         {{/each}}
