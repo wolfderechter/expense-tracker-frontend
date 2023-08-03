@@ -63,13 +63,11 @@ export default class IndexController extends Controller {
   // This function sorts and filters expenses, if a month is selected it will filter for those expenses
   @action
   async filter() {
-    console.log('filtering');
     this.filteredExpenses = [...this.model.expenses];
     this.filteredExpenses.sort((a, b) => new Date(a.date) - new Date(b.date));
 
     if (this.month === -2) {
       // show all expenses
-      console.log('hi?');
       return;
     }
 

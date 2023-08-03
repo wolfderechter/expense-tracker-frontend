@@ -4,11 +4,13 @@ import { inject as service } from '@ember/service';
 
 export default class CategoryComponent extends Component {
   @service store;
+  @service toast;
 
   @action
   removeCategory(category, event) {
     event.preventDefault();
     category.destroyRecord();
+    this.toast.success('Category sucesfully removed!', 'Success!');
   }
 
   @action

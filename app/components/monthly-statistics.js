@@ -79,7 +79,7 @@ export default class MonthlyStatisticsComponent extends Component {
       ],
       datasets: [
         {
-          label: 'Total Expenses',
+          label: 'Total Expenses Value',
           data: data,
           backgroundColor: 'rgba(54, 162, 235, 0.5)',
           borderColor: 'rgba(54, 162, 235, 1)',
@@ -108,7 +108,7 @@ export default class MonthlyStatisticsComponent extends Component {
       labels: labels,
       datasets: [
         {
-          label: 'Total Expenses',
+          label: 'Total Expenses Value',
           data: data,
           backgroundColor: 'rgba(75, 192, 192, 0.5)',
           borderColor: 'rgba(75, 192, 192, 1)',

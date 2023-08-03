@@ -9,6 +9,7 @@ export default class NewController extends Controller {
   @tracked newValue;
   @tracked newDate;
 
+  @service toast;
   @service store;
   @tracked categories;
   @tracked newCategory;
@@ -58,6 +59,9 @@ export default class NewController extends Controller {
     await expense.save();
     expense.category = this.existingCategory;
     await expense.save();
+    await expense.reload();
+
+    this.toast.success('Expense sucesfully created!', 'Success!');
 
     // clear input fields
     this.newTitle = '';
@@ -87,6 +91,10 @@ export default class NewController extends Controller {
 
     try {
       await category.save();
+      this.toast.success(
+        `Category ${this.newCategory} sucesfully created!`,
+        'Success!'
+      );
       this.newCategory = '';
     } catch (error) {
       console.error('Error creating category:', error);
