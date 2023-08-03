@@ -15,19 +15,21 @@ export default class CategoryComponent extends Component {
   categoryExpensesAmount(category) {
     let { month, year } = this.args;
 
-    // only filter and count expenses when the month is set and there are expenses
-    if (month > -1 && category.expenses.length > 0) {
+    if (month === -1 && category.expenses.length > 0) { //filtering is set to a specific year
       let count = 0;
       category.expenses.forEach((expense) => {
         const expenseDate = new Date(expense.date);
-        if (
-          expenseDate.getFullYear() === year &&
-          expenseDate.getMonth() === month
-        )
-          count++;
+        if (expenseDate.getFullYear() === year) count++;
       });
       return count;
-    } else {
+    } else if (month > -1 && category.expenses.length > 0) { //filtering is set to a specific month and year
+      let count = 0;
+      category.expenses.forEach((expense) => {
+        const expenseDate = new Date(expense.date);
+        if (expenseDate.getFullYear() === year && expenseDate.getMonth() === month) count++;
+      });
+      return count;
+    } else { //filtering is set to all time
       return category.expenses.length;
     }
   }

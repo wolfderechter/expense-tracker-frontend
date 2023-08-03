@@ -7,7 +7,7 @@ export default class IndexController extends Controller {
   @service store;
   @tracked filteredCategories;
   @tracked filteredExpenses = null;
-  @tracked month = -1;
+  @tracked month = -2; //set default filter to 'all time'
   @tracked year = new Date().getFullYear();
 
   constructor() {
@@ -39,7 +39,7 @@ export default class IndexController extends Controller {
     this.month = Number(event.target.value);
 
     // reset the year to the current year after selecting 'all time'
-    if (event.target.value === '-1') {
+    if (event.target.value === '-2') {
       this.year = new Date().getFullYear();
     }
 
@@ -63,11 +63,22 @@ export default class IndexController extends Controller {
   // This function sorts and filters expenses, if a month is selected it will filter for those expenses
   @action
   async filter() {
+    console.log('filtering');
     this.filteredExpenses = [...this.model.expenses];
     this.filteredExpenses.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    if (this.month === -1) {
+    if (this.month === -2) {
       // show all expenses
+      console.log('hi?');
+      return;
+    }
+
+    if (this.month === -1) {
+      // show all expenses of the year
+      this.filteredExpenses = this.filteredExpenses.filter((expense) => {
+        const expenseDate = new Date(expense.date);
+        return expenseDate.getFullYear() === this.year;
+      });
       return;
     }
 

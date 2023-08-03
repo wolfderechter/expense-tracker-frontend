@@ -12,7 +12,8 @@
       this.prevMonth}}>&#60;</button>
 
     <select class='w-[125px] text-center mb-1' id="month" value={{this.month}} {{on "change" this.changeMonth }}>
-      <option value="-1" selected="{{if (eq this.month -1) true}}">All Time</option>
+      <option value="-2" selected="{{if (eq this.month -2) true}}">All Time</option>
+      <option value="-1" selected="{{if (eq this.month -1) true}}">All Year</option>
       <option value="0" selected="{{if (eq this.month 0) true}}">January</option>
       <option value="1" selected="{{if (eq this.month 1) true}}">February</option>
       <option value="2" selected="{{if (eq this.month 2) true}}">March</option>
@@ -33,7 +34,7 @@
   </div>
 
   {{!-- Hide the year when the everything option is selected --}}
-  {{#if (not-eq this.month -1)}}
+  {{#if (not-eq this.month -2)}}
   <div>
     <input value={{this.year}} class="w-[125px] text-center bg-gray-100 mb-1" type="number" id="year" min="1900"
       max="2100" step="1" {{on "change" this.changeYear }}>

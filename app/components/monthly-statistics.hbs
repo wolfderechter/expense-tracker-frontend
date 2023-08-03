@@ -1,5 +1,11 @@
 <div class="text-center">
-  <h1 class="text-2xl mb-3 text-center">{{if (eq @month -1) 'All' 'Monthly'}} Statistics</h1>
+  {{#if (eq @month -2)}}
+  <h1 class="text-2xl mb-3 text-center">All Statistics</h1>
+  {{else if (eq @month -1)}}
+  <h1 class="text-2xl mb-3 text-center">All Statistics of {{@year}}</h1>
+  {{else }}
+  <h1 class="text-2xl mb-3 text-center">Monthly Statistics of {{this.currentMonth}}</h1>
+  {{/if }}
   <p>{{this.totalExpenses}} total expenses</p>
   <p>Averaging ${{this.averageValue}}</p>
   <!-- Add more statistics as needed -->
@@ -11,11 +17,9 @@
   <!-- switch between months and month depending on the filter -->
   {{#if (eq this.args.month -1)}}
   <h3 class='font-bold text-gray-700 mt-4'>Total Expenses by Months for {{this.args.year}}</h3>
-
   <EmberChart @type="bar" @data={{this.totalExpensesByMonthsData}} @width="250" @height="250" />
 
-
-  {{else}}
+  {{else if (gt this.args.month -1)}}
   <h3 class='font-bold text-gray-700 mt-4'>Total Expenses per Day for {{this.currentMonth}}, {{this.args.year}}</h3>
   <EmberChart @type="bar" @data={{this.totalExpensesByOneMonthData}} @width="250" @height="250" />
   {{/if}}

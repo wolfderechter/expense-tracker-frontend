@@ -29,7 +29,7 @@ export default class MonthlyStatisticsComponent extends Component {
       const expenseDate = new Date(expense.date);
 
       if (
-        month === -1 ||
+        month === -2 || month === -1 ||
         (expenseDate.getFullYear() === year && expenseDate.getMonth() === month)
       ) {
         data[categoryTitle] =
@@ -95,7 +95,7 @@ export default class MonthlyStatisticsComponent extends Component {
 
     filteredExpenses.forEach((expense) => {
       const expenseDate = new Date(expense.date);
-      if (expenseDate.getFullYear() === year && expenseDate.getMonth() === month) {
+      if (month === -1 || expenseDate.getFullYear() === year && expenseDate.getMonth() === month) {
         const day = expenseDate.getDate();
         data[day - 1] += parseFloat(expense.value);
       }
