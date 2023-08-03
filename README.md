@@ -1,7 +1,6 @@
-# frontend
+# expense-tracker-frontend
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+The frontend of the expense-tracker, an ember.js application where you can add, edit and remove expenses and their categories. Additionally you can filter by all/year/month and gain insights into that period with some stats and charts.
 
 ## Prerequisites
 
