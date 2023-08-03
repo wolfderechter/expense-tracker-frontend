@@ -1,14 +1,9 @@
 import Component from '@glimmer/component';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 
 export default class MonthlyStatisticsComponent extends Component {
   @service store;
-  @tracked chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
 
   @computed('args.filteredExpenses.length')
   get totalExpenses() {
@@ -41,6 +36,7 @@ export default class MonthlyStatisticsComponent extends Component {
           (data[categoryTitle] || 0) + parseFloat(expense.value);
       }
     });
+
     return {
       labels: Object.keys(data),
       datasets: [
@@ -61,5 +57,72 @@ export default class MonthlyStatisticsComponent extends Component {
         },
       ],
     };
+  }
+
+
+  get totalExpensesByMonthsData() {
+    const { year, filteredExpenses } = this.args;
+    const data = new Array(12).fill(0);
+
+    filteredExpenses.forEach((expense) => {
+      const expenseDate = new Date(expense.date);
+      if (expenseDate.getFullYear() === year) {
+        const month = expenseDate.getMonth();
+        data[month] += parseFloat(expense.value);
+      }
+    });
+
+    return {
+      labels: [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ],
+      datasets: [
+        {
+          label: 'Total Expenses',
+          data: data,
+          backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1,
+        },
+      ],
+    };
+  }
+  get totalExpensesByOneMonthData() {
+    const { year, month, filteredExpenses } = this.args;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const data = new Array(daysInMonth).fill(0);
+
+    filteredExpenses.forEach((expense) => {
+      const expenseDate = new Date(expense.date);
+      if (expenseDate.getFullYear() === year && expenseDate.getMonth() === month) {
+        const day = expenseDate.getDate();
+        data[day - 1] += parseFloat(expense.value);
+      }
+    });
+
+    // Generate labels for each day of the month
+    const labels = Array.from({ length: daysInMonth }, (_, i) => `${i + 1}`);
+
+    return {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Total Expenses',
+          data: data,
+          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+        },
+      ],
+    };
+  }
+
+  get currentMonth() {
+    const monthsList = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    return monthsList[this.args.month];
   }
 }

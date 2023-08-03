@@ -5,53 +5,49 @@
 <h1 class="text-4xl mb-3 text-center">🧾</h1>
 <h1 class="text-4xl mb-6 text-center">Expense Tracker</h1>
 
-<div class="grid md:grid-cols-2 grid-cols-1 gap-8 mt-6">
-  <div class='w-[250px] text-center'>
-    <label for="month">Expenses period</label>
-    <div>
-      <button class='bg-gray-300 hover:bg-gray-600 text-white font-bold px-3 rounded' type="button" {{on "click"
-        this.prevMonth}}>&#60;</button>
+<div class='text-center'>
+  <label for="month">Expenses period</label>
+  <div>
+    <button class='bg-gray-300 hover:bg-gray-600 text-white font-bold px-3 rounded' type="button" {{on "click"
+      this.prevMonth}}>&#60;</button>
 
-      <select class='w-[125px] text-center mb-1' id="month" value={{this.month}} {{on "change" this.changeMonth }}>
-        <option value="-1" selected="{{if (eq this.month -1) true}}">All Time</option>
-        <option value="0" selected="{{if (eq this.month 0) true}}">January</option>
-        <option value="1" selected="{{if (eq this.month 1) true}}">February</option>
-        <option value="2" selected="{{if (eq this.month 2) true}}">March</option>
-        <option value="3" selected="{{if (eq this.month 3) true}}">April</option>
-        <option value="4" selected="{{if (eq this.month 4) true}}">May</option>
-        <option value="5" selected="{{if (eq this.month 5) true}}">June</option>
-        <option value="6" selected="{{if (eq this.month 6) true}}">July</option>
-        <option value="7" selected="{{if (eq this.month 7) true}}">August</option>
-        <option value="8" selected="{{if (eq this.month 8) true}}">September</option>
-        <option value="9" selected="{{if (eq this.month 9) true}}">October</option>
-        <option value="10" selected="{{if (eq this.month 10) true}}">November</option>
-        <option value="11" selected="{{if (eq this.month 11) true}}">December</option>
-      </select>
+    <select class='w-[125px] text-center mb-1' id="month" value={{this.month}} {{on "change" this.changeMonth }}>
+      <option value="-1" selected="{{if (eq this.month -1) true}}">All Time</option>
+      <option value="0" selected="{{if (eq this.month 0) true}}">January</option>
+      <option value="1" selected="{{if (eq this.month 1) true}}">February</option>
+      <option value="2" selected="{{if (eq this.month 2) true}}">March</option>
+      <option value="3" selected="{{if (eq this.month 3) true}}">April</option>
+      <option value="4" selected="{{if (eq this.month 4) true}}">May</option>
+      <option value="5" selected="{{if (eq this.month 5) true}}">June</option>
+      <option value="6" selected="{{if (eq this.month 6) true}}">July</option>
+      <option value="7" selected="{{if (eq this.month 7) true}}">August</option>
+      <option value="8" selected="{{if (eq this.month 8) true}}">September</option>
+      <option value="9" selected="{{if (eq this.month 9) true}}">October</option>
+      <option value="10" selected="{{if (eq this.month 10) true}}">November</option>
+      <option value="11" selected="{{if (eq this.month 11) true}}">December</option>
+    </select>
 
-      <button class='bg-gray-300 hover:bg-gray-600 text-white font-bold px-3 rounded' type="button" {{on "click"
-        this.nextMonth}}>&#62;</button>
-
-    </div>
-
-    {{!-- Hide the year when the everything option is selected --}}
-    {{#if (not-eq this.month -1)}}
-    <div>
-      <input value={{this.year}} class="w-[125px] text-center bg-gray-100 mb-1" type="number" id="year" min="1900"
-        max="2100" step="1" {{on "change" this.changeYear }}>
-    </div>
-    {{/if}}
-
-    <div>
-      <button class='bg-gray-300 hover:bg-gray-200 text-gray-800 font-bold px-3 rounded mb-1' type="button" {{on "click"
-        this.setCurrentMonth}}>Current Month</button>
-    </div>
+    <button class='bg-gray-300 hover:bg-gray-600 text-white font-bold px-3 rounded' type="button" {{on "click"
+      this.nextMonth}}>&#62;</button>
 
   </div>
-  <MonthlyStatistics class="w-[250px] text-center" @filteredExpenses={{this.filteredExpenses}} @month={{this.month}}
-    @year={{this.year}} />
+
+  {{!-- Hide the year when the everything option is selected --}}
+  {{#if (not-eq this.month -1)}}
+  <div>
+    <input value={{this.year}} class="w-[125px] text-center bg-gray-100 mb-1" type="number" id="year" min="1900"
+      max="2100" step="1" {{on "change" this.changeYear }}>
+  </div>
+  {{/if}}
+
+  <div>
+    <button class='bg-gray-300 hover:bg-gray-200 text-gray-800 font-bold px-3 rounded mb-1' type="button" {{on "click"
+      this.setCurrentMonth}}>Current Month</button>
+  </div>
+
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6 items-start">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6 items-start">
   <div class="w-[250px]">
     <h1 class="text-2xl mb-3 text-center">All expenses</h1>
     <div class="flex justify-center mb-4">
@@ -73,6 +69,9 @@
     <div class="shadow border rounded p-2 h-full max-h-[50vh] overflow-y-auto">
       <Categories @categories={{@model.categories}} @year={{this.year}} @month={{this.month}} />
     </div>
+  </div>
+  <div class="w-[250px]">
+    <MonthlyStatistics @filteredExpenses={{this.filteredExpenses}} @month={{this.month}} @year={{this.year}} />
   </div>
 </div>
 
