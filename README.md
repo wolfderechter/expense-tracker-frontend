@@ -4,6 +4,12 @@
 
 The frontend of the expense-tracker, an ember.js application where you can add, edit and remove expenses and their categories. Additionally you can filter by all/year/month and gain insights into that period with some stats and charts.
 
+#### The homepage
+<img src="https://github.com/wolfderechter/expense-tracker-frontend/assets/60930264/8a9b7003-879d-46b7-b561-7fdb7b33b815" width="850px">
+
+---
+#### Creating new expenses/categories
+<img src="https://github.com/wolfderechter/expense-tracker-frontend/assets/60930264/bb9c64f1-f80d-4f51-a42a-6fb922077892" width="850px">
 
 ## Prerequisites
 
