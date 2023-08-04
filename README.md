@@ -1,36 +1,28 @@
 # expense-tracker-frontend
 
+![workflow](https://build.redpencil.io/api/badges/2385/status.svg)
+
 The frontend of the expense-tracker, an ember.js application where you can add, edit and remove expenses and their categories. Additionally you can filter by all/year/month and gain insights into that period with some stats and charts.
+
 
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
 
-* [Git](https://git-scm.com/)
 * [Node.js](https://nodejs.org/) (with npm)
 * [Ember CLI](https://cli.emberjs.com/release/)
-* [Google Chrome](https://google.com/chrome/)
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd frontend`
+* `git clone https://github.com/wolfderechter/expense-tracker-frontend`
+* `cd expense-tracker-frontend`
 * `npm install`
 
 ## Running / Development
 
-* `ember serve`
+* `ember serve --proxy http://localhost:80`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 * Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
 
 ### Linting
 
@@ -44,7 +36,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+ - Use the docker-compose and instructions of [expense-tracker](https://github.com/wolfderechter/expense-tracker).
 
 ## Further Reading / Useful Links
 
